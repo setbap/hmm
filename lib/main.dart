@@ -386,7 +386,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           );
         },
-        label: const Text("تصاویر مدل"),
+        label: const Text(
+          "تصاویر مدل",
+          locale: Locale("fa", "IR"),
+        ),
         icon: const Icon(Icons.image),
       ),
     );
