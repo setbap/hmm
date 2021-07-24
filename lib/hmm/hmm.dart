@@ -90,10 +90,10 @@ class HMM {
   ];
   final Map<String, List<double>> outputProb = {
     kWORDS[0]: [0.2, 0.0, 0.2, 0.0],
-    kWORDS[1]: [0.2, 0.0, 0.2, 0.0],
+    kWORDS[1]: [0.2, 0.2, 0.2, 0.0],
     kWORDS[2]: [0.2, 0.0, 0.2, 0.0],
-    kWORDS[3]: [0.2, 0.0, 0.2, 0.0],
-    kWORDS[4]: [0.2, 0.0, 0.2, 0.0],
+    kWORDS[3]: [0.1, 0.8, 0.1, 0.0],
+    kWORDS[4]: [0.3, 0.0, 0.3, 0.0],
     kWORDS[5]: [0.0, 0.0, 0.0, 1.0],
   };
   static const stateNumber = {
