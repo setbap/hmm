@@ -1,9 +1,12 @@
 import 'dart:math';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hmm/hmm/hmm.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -77,10 +80,12 @@ class _MyHomePageState extends State<MyHomePage> {
     final wordList = selectedWord.map((e) => e.name);
     final data = hmmCalc(wordList.toList());
     final bool canAddMore = !(data.isEmpty && selectedWord.isNotEmpty);
+
     double maxProb = 0;
-    if (data.isNotEmpty) {
-      maxProb =
-          data.length > 1 ? data.map((e) => e.prob).reduce(max) : data[0].prob;
+    double sumProb = 0;
+    for (var i = 0; i < data.length; i++) {
+      maxProb = max(maxProb, data[i].prob);
+      sumProb += data[i].prob;
     }
     final color = canAddMore ? Colors.green : Colors.red;
     return Scaffold(
@@ -211,20 +216,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 24,
-                ),
-              ),
-              const SliverPadding(
-                padding: EdgeInsets.only(
-                  top: 0,
-                  right: 24,
-                  left: 24,
-                  bottom: 8,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: Text(
+              SliverToBoxAdapter(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: boxDecoration,
+                  child: const Text(
                     "احتمال های محاسبه شده (احتمال هایی که با رنگ سبر مشخص شدند محتمل ترین احتمال ها هستند)",
                     style: TextStyle(
                       color: Colors.grey,
@@ -234,14 +234,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              if (selectedWord.isNotEmpty && data.isNotEmpty)
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: boxDecoration,
+                    child: Center(
+                      child: Text(
+                        "احتمال این ترکیب از کلمات $sumProb می باشد",
+                        // style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ),
+                  ),
+                ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   data
                       .map(
-                        (e) => Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
+                        (item) => Container(
+                          margin: const EdgeInsets.only(
+                            right: 16,
+                            left: 16,
+                            top: 8,
                           ),
                           padding: const EdgeInsets.symmetric(
                             vertical: 8,
@@ -251,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               width: 3,
-                              color: (e.prob == maxProb
+                              color: (item.prob == maxProb
                                       ? Colors.green
                                       : Colors.red)
                                   .withAlpha(160),
@@ -260,23 +275,42 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ListTile(
                             title: Text(
                               // display(e.prob),
-                              " احتمال : ${e.prob.toString()} ",
+                              " احتمال : ${item.prob.toString()} ",
+                              style: TextStyle(
+                                color: (item.prob == maxProb
+                                    ? Colors.green
+                                    : Colors.red),
+                              ),
                             ),
                             subtitle: Directionality(
                               textDirection: TextDirection.ltr,
                               child: Builder(builder: (context) {
                                 return Wrap(
-                                  runSpacing: 8,
-                                  spacing: 12,
-                                  children: e.states
-                                      .map((e) => Column(children: [
+                                  runSpacing: 12,
+                                  spacing: 20,
+                                  direction: Axis.horizontal,
+                                  children: item.states
+                                      .map(
+                                        (e) => Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              CupertinoIcons.arrow_right_circle,
+                                              color: (item.prob == maxProb
+                                                      ? Colors.green
+                                                      : Colors.red)
+                                                  .withAlpha(160),
+                                            ),
+                                            const SizedBox(width: 4),
                                             Text(
-                                              "--> $e ",
+                                              e,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headline6,
                                             )
-                                          ]))
+                                          ],
+                                        ),
+                                      )
                                       .toList(),
                                 );
                               }),
@@ -324,6 +358,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           showDialog(
