@@ -4,6 +4,9 @@ List<Path> hmmCalc(List<String> myWords) {
   if (myWords.isEmpty) {
     return [];
   }
+  if (myWords.first == ".") {
+    return [];
+  }
   final hmm = HMM();
   List<Path> output = [];
   // var list = hmm.findPossibleNextState(prevState: "subject", word: myWords[0]);
