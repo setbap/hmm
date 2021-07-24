@@ -324,45 +324,35 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(
-          right: 28.0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            FloatingActionButton.extended(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text("نمایش نمودار و جدول مدل"),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    content: Image.asset(
-                      "assets/hmm.jpg",
-                      width: 400,
-                    ),
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: TextButton(
-                          child: const Text("بستن"),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      )
-                    ],
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text("نمایش نمودار و جدول مدل"),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              content: Image.asset(
+                "assets/hmm.jpg",
+                width: 400,
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextButton(
+                    child: const Text("بستن"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                );
-              },
-              label: const Text("تصاویر مدل"),
-              icon: const Icon(Icons.image),
+                )
+              ],
             ),
-          ],
-        ),
+          );
+        },
+        label: const Text("تصاویر مدل"),
+        icon: const Icon(Icons.image),
       ),
     );
   }
