@@ -359,7 +359,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
             context: context,
@@ -386,11 +386,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           );
         },
-        label: const Text(
-          "تصاویر مدل",
-          locale: Locale("fa", "IR"),
-        ),
-        icon: const Icon(Icons.image),
+        tooltip: "تصاویر مدل",
+        child: const Icon(Icons.image),
       ),
     );
   }
