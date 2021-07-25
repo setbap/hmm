@@ -95,11 +95,11 @@ flutter:
   #         weight: 700
 
 flutter_native_splash:
-  color: "#ff2222"
+  color: "#ff5264"
 
   image: s.png
   #  image_dark: assets/splash_dark.png
 
-  fullscreen: false
+  fullscreen: true
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
