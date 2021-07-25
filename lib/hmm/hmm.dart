@@ -9,12 +9,6 @@ List<Path> hmmCalc(List<String> myWords) {
   }
   final hmm = HMM();
   List<Path> output = [];
-  // var list = hmm.findPossibleNextState(prevState: "subject", word: myWords[0]);
-  // for (var item in list) {
-  //   output.add(
-  //     Path(states: [item["state"] as String], prob: item["prob"] as double),
-  //   );
-  // }
   output.add(
     Path(
       states: ["subject"],
@@ -45,7 +39,6 @@ List<Path> hmmCalc(List<String> myWords) {
     output.clear();
     output.addAll(tempOutput);
   }
-  log(output.toString());
   return output;
 }
 
