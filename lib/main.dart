@@ -387,7 +387,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
         tooltip: "تصاویر مدل",
-        child: const Icon(Icons.image),
+        child: const Icon(CupertinoIcons.info),
       ),
     );
   }
