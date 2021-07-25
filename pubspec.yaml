@@ -47,6 +47,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  flutter_native_splash: ^1.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -92,6 +93,13 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+
+flutter_native_splash:
+  color: "#ff2222"
+
+  image: s.png
+  #  image_dark: assets/splash_dark.png
+
+  fullscreen: false
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
