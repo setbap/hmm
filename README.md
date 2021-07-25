@@ -7,7 +7,7 @@
 ویدیو زیر نحوه کار با سایت را نشان می دهد
 
 <p align='center'>
-    <img  src="https://raw.githubusercontent.com/setbap/hmm/main/hmm.gif" />
+    <img width="272px" src="https://raw.githubusercontent.com/setbap/hmm/main/hmm.gif" />
 </p>
 
 ## معرفی بخش ها
